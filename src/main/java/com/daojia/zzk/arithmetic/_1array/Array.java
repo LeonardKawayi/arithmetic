@@ -10,6 +10,7 @@ public class Array {
     //数组的容量大小
     private int n;
 
+    
     // 当前数据个数
     private int count;
 
