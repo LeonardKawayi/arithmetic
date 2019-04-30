@@ -1,4 +1,4 @@
-package com.daojia.zzk.arithmetic.dynamicProgramming;
+package com.daojia.zzk.arithmetic._16dynamicProgramming;
 
 /**
  * @author zhangzk

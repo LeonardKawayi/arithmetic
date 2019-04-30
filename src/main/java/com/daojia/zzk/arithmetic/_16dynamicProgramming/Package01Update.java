@@ -1,4 +1,4 @@
-package com.daojia.zzk.arithmetic.dynamicProgramming;
+package com.daojia.zzk.arithmetic._16dynamicProgramming;
 
 /**
  * 0-1背包问题升级

@@ -1,4 +1,4 @@
-package com.daojia.zzk.arithmetic.dynamicProgramming;
+package com.daojia.zzk.arithmetic._16dynamicProgramming;
 
 /**
  * 动态规划2--原理例子：正方形方格，从左上角出发，到右下角最短路径

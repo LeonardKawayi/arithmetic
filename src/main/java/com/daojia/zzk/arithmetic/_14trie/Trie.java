@@ -1,4 +1,4 @@
-package com.daojia.zzk.arithmetic.trie;
+package com.daojia.zzk.arithmetic._14trie;
 
 /**
  * Trie 树

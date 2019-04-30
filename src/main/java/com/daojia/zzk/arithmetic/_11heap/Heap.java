@@ -1,7 +1,7 @@
-package com.daojia.zzk.arithmetic.heap;
+package com.daojia.zzk.arithmetic._11heap;
 
 /**
- * 堆
+ * 堆--大顶堆
  */
 public class Heap {
     // 数组，从下标 1 开始存储数据

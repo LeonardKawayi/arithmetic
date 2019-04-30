@@ -1,4 +1,4 @@
-package com.daojia.zzk.arithmetic.graph;
+package com.daojia.zzk.arithmetic._12graph;
 
 import java.util.LinkedList;
 import java.util.Queue;
