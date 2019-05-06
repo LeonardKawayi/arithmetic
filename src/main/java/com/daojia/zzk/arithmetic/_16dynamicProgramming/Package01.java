@@ -1,6 +1,7 @@
 package com.daojia.zzk.arithmetic._16dynamicProgramming;
 
 /**
+ * @author zhangzk
  * 0-1背包问题的求解
  */
 public class Package01 {
@@ -31,7 +32,6 @@ public class Package01 {
      * 再次计算重复的f(i, cw)时，可以直接从备忘录中取出，不用再递归计算了，避免冗余计算。
      * */
     private boolean[][] mem = new boolean[5][10]; // 备忘录，默认值 false
-
     public void f2(int i, int cw) { // 调用 f2(0, 0)
         if (cw == w || i == n) { // cw==w 表示装满了，i==n 表示物品都考察完了
         if (cw > maxW) maxW = cw;
@@ -69,7 +69,7 @@ public class Package01 {
 
             // 把第 i 个物品放入背包
             for (int j = 0; j < w-weight[i]; j++) {
-                if (states[i-1][weight[i]]) {
+                if (states[i-1][j]) {
                     states[i][j+weight[i]] = true;
                 }
             }
