@@ -1,7 +1,5 @@
 package com.daojia.zzk.arithmetic._16dynamicProgramming;
 
-import com.daojia.zzk.arithmetic._1array.Array;
-
 import java.util.Arrays;
 
 /**
@@ -35,7 +33,7 @@ public class CoinChange {
         }
 
         int[] dp = new int[amount+1];
-        for (int i = 0; i <= amount ; i++) {
+        for (int i = 0; i < coins.length ; i++) {
             if (coins[i] < amount) {
                 dp[coins[i]] = 1;
             } else if (coins[i] == amount) {
@@ -64,5 +62,30 @@ public class CoinChange {
         } else {
             return dp[amount];
         }
+    }
+
+    static int coinChange3 (int[] coins, int amount) {
+        if (coins.length == 0) return -1;
+        int[] dp = new int[amount+1];
+
+        Arrays.fill(dp, 1, amount+1, Integer.MAX_VALUE);
+        for (int i = 0; i < coins.length; i++) {
+            for (int j = coins[i]; j <= amount; j++) {
+                if (dp[j-coins[i]] != Integer.MAX_VALUE) {
+                    dp[j] = Math.min(dp[j], dp[j-coins[i]]+1);
+                }
+            }
+        }
+        if (dp[amount] != Integer.MAX_VALUE) {
+            return dp[amount];
+        }
+
+        return -1;
+    }
+
+    public static void main(String[] args){
+        int[] coins = new int[]{1,2,5};
+        int i = coinChange3(coins, 11);
+        System.out.println(i);
     }
 }
