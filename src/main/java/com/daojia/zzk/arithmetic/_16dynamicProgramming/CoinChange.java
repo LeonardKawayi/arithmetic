@@ -71,6 +71,7 @@ public class CoinChange {
         Arrays.fill(dp, 1, amount+1, Integer.MAX_VALUE);
         for (int i = 0; i < coins.length; i++) {
             for (int j = coins[i]; j <= amount; j++) {
+                // 【前提是dp[j-coins[i]]必须有值，如果dp[j-coins[i]]是无穷大，说明无法凑出j-coins[i]价值的钱包，那么把w[i]放进去以后，自然也凑不出dp[j]的钱包
                 if (dp[j-coins[i]] != Integer.MAX_VALUE) {
                     dp[j] = Math.min(dp[j], dp[j-coins[i]]+1);
                 }

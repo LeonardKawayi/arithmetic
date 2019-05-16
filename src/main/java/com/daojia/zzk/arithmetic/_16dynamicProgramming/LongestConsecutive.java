@@ -31,7 +31,7 @@ public class LongestConsecutive {
             res = Math.max(res, len);
             map.put(num, 1);
             map.put(num-left, len);
-            map.put(num+right, left);
+            map.put(num+right, len);
         }
 
         return res;
