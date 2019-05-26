@@ -23,11 +23,11 @@ public class MaxProfit {
            return 0;
        }
 
-       int max = prices[0];
-       int min = 0;
+       int min = prices[0];
+       int max = 0;
 
         for (int i = 0; i < prices.length; i++) {
-            max = Math.max(max, prices[i] - max);
+            max = Math.max(max, prices[i] - min);
             min = Math.min(min, prices[i]);
         }
         return max;

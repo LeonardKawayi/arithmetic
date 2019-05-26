@@ -6,7 +6,6 @@ package com.daojia.zzk.arithmetic._6sort;
  * 稳定的排序算法
  * 排序的时间复杂度是 O(nlogn)
  * 不是原地排序算法,需要借助额外空间的排序算法
- *
  */
 public class MergeSort {
 
@@ -16,7 +15,7 @@ public class MergeSort {
 
     public static void mergerSort (int[] array, int left, int right) {
         if (left < right) {
-            int mid = (left + right) / 2;
+            int mid = left + (right - left) >> 1;
             // 左边归并排序，使得左子序列有序
             mergerSort(array, left, mid);
             // 右边归并排序，是的右子序列有序
@@ -61,6 +60,5 @@ public class MergeSort {
             System.out.println(test[i]);
         }
     }
-
 
 }

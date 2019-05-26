@@ -1,6 +1,9 @@
 package com.daojia.zzk.arithmetic._10tree;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -158,6 +161,35 @@ public class BinarySearchTree3 {
     }
 
     /**
+     * 层序遍历
+     * */
+    public List<List<Integer>> levelOrder2 (BinarySearchTreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+
+        Queue<BinarySearchTreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            int count = queue.size();
+            List<Integer> list = new ArrayList<>();
+            while (count >= 0) {
+                BinarySearchTreeNode treeNode = queue.poll();
+                list.add(treeNode.value);
+
+                if (treeNode.left != null) {
+                    queue.add(treeNode.left);
+                }
+                if (treeNode.right != null) {
+                    queue.add(treeNode.right);
+                }
+                count--;
+            }
+            result.add(list);
+        }
+        return result;
+    }
+
+    /**
      * 二叉树的最大深度
      * 左右子树中深度最大者 + 1
      * */
@@ -260,6 +292,8 @@ public class BinarySearchTree3 {
 
     /**
      * 反转二叉树
+     * 二叉树镜像
+     * 非递归实现
      * */
     BinarySearchTreeNode reverseTree (BinarySearchTreeNode root) {
         LinkedList<BinarySearchTreeNode> queue = new LinkedList<>();
@@ -281,6 +315,180 @@ public class BinarySearchTree3 {
             }
         }
 
+        return root;
+    }
+
+    /**
+     * 二叉树镜像
+     * 递归实现
+     * */
+    BinarySearchTreeNode reverseTreeRe (BinarySearchTreeNode root) {
+        if (root == null) {
+            return root;
+        }
+        if (root.left == null && root.right == null) {
+            return root;
+        }
+
+        BinarySearchTreeNode tmp = root.left;
+        root.left = root.right;
+        root.right = tmp;
+
+        if (root.left != null) {
+            reverseTreeRe(root.left);
+        }
+
+        if (root.right != null) {
+            reverseTreeRe(root.right);
+        }
+
+        return root;
+    }
+
+    /**
+     * 对称二叉树
+     * 栈实现
+     * */
+    public boolean isSymmetric(BinarySearchTreeNode root) {
+        if (root == null) return true;
+        Stack<BinarySearchTreeNode> stack = new Stack<>();
+        stack.push(root.left);
+        stack.push(root.right);
+
+        while (!stack.isEmpty()) {
+            BinarySearchTreeNode node1 = stack.pop();
+            BinarySearchTreeNode node2 = stack.pop();
+            if (node1 == null && node2 == null) {
+                return true;
+            }
+            if (node1 == null || node2 == null || node1.value != node2.value) return false;
+
+            stack.push(node1.left);
+            stack.push(node2.right);
+            stack.push(node1.right);
+            stack.push(node2.left);
+        }
+
+        return true;
+    }
+
+    /**
+     * 对称二叉树
+     * 递归实现
+     * */
+    public boolean isSymmetricPre(BinarySearchTreeNode root) {
+        if (root == null) return true;
+
+        return helperIsSymmetric(root.left, root.right);
+    }
+
+    public boolean helperIsSymmetric (BinarySearchTreeNode left, BinarySearchTreeNode right) {
+        if (left == null && right == null) return true;
+
+        if (left == null || right == null || left.value != right.value) return false;
+
+        return helperIsSymmetric(left.left, right.right) && helperIsSymmetric(left.right, right.left);
+    }
+
+    /**
+     * 一棵树，返回从右侧查看，所能看到的节点。每一层只返回最右侧的节点，其它节点都被挡住
+     * */
+    public List<Integer> rightViewBinarySearchTree (BinarySearchTreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        if (root == null) return result;
+
+        Queue<BinarySearchTreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        Integer preCount = 1;
+        Integer pCount = 0;
+        BinarySearchTreeNode cur;
+        while (!queue.isEmpty()) {
+            cur = queue.poll();
+            if (preCount == 1) {
+                result.add(cur.value);
+            }
+            -- preCount;
+
+            if (cur.left != null) {
+                queue.add(cur.left);
+                ++pCount;
+            }
+
+            if (cur.right != null) {
+                queue.add(cur.right);
+                ++pCount;
+            }
+
+            if (preCount == 0) {
+                preCount = pCount;
+                pCount = 0;
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * 二叉树展开为链表(后序)
+     * 递归实现
+     * */
+    public void flattenRe(BinarySearchTreeNode root) {
+        if (root == null) return;
+
+        flattenRe(root.left);
+        flattenRe(root.right);
+
+        BinarySearchTreeNode tmp = root.right;
+        root.right = root.left;
+        root.left = null;
+        while (root.right != null) root = root.right;
+        root.right = tmp;
+    }
+
+    public void flatten(BinarySearchTreeNode root) {
+        if (root == null) return;
+        Stack<BinarySearchTreeNode> stack = new Stack<>();
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+
+            if (!stack.isEmpty()) {
+                BinarySearchTreeNode cur = stack.pop();
+                BinarySearchTreeNode tmp = cur.right;
+                cur.right = cur.left;
+                cur.left = null;
+
+                while (cur.right != null) cur = cur.right;
+                cur.right = tmp;
+                root = tmp;
+            }
+        }
+    }
+
+    /**
+     * 有序链表转成二叉树
+     * */
+    public BinarySearchTreeNode sortedListToBST(ListNode head) {
+        if (head == null) return null;
+        if (head.next == null) return new BinarySearchTreeNode(head.val);
+
+        ListNode fast = head;
+        ListNode slow = head;
+        ListNode prev = new ListNode(0);
+        prev.next = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            prev = prev.next;
+        }
+
+        BinarySearchTreeNode root = new BinarySearchTreeNode(slow.val);
+        root.right = sortedListToBST(slow.next);
+        prev.next = null;
+        root.left = sortedListToBST(head);
         return root;
     }
 }

@@ -35,4 +35,17 @@ public class LowestCommonAncestor {
             return null;
         }
     }
+
+    public BinarySearchTreeNode lowestCommonAncestor2(BinarySearchTreeNode root, BinarySearchTreeNode p, BinarySearchTreeNode q) {
+        if (root == null) {
+            return null;
+        }
+        if (p.value < root.value && q.value < root.value) {
+            return lowestCommonAncestor2(root.left, p, q);
+        } else if (p.value > root.value && q.value > root.value) {
+            return lowestCommonAncestor2(root.right, p, q);
+        } else {
+            return root;
+        }
+    }
 }
