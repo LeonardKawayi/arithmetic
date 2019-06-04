@@ -108,28 +108,23 @@ public class BinarySearchTree3 {
     private static void postOrder (BinarySearchTreeNode biTree) {
         int left = 1;
         int right = 2;
-
         Stack<BinarySearchTreeNode> stack = new Stack<>();
         Stack<Integer> flagStack = new Stack<>();
-
         while (biTree != null || !stack.isEmpty()) {
             while (biTree != null) {
                 stack.push(biTree);
                 flagStack.push(left);
                 biTree = biTree.left;
             }
-
             while (!stack.isEmpty() && flagStack.peek() == right) {
                 flagStack.pop();
                 System.out.println(stack.pop().value);
             }
-
             if (!stack.isEmpty() && flagStack.peek() == left) {
                 flagStack.pop();
                 flagStack.push(right);
                 biTree = stack.peek().right;
             }
-
         }
     }
 

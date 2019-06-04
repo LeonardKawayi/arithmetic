@@ -10,7 +10,6 @@ public class SelectionSort {
 
     public void selectionSort (int[] array, int n) {
         if (n <= 1) return;
-
         for (int i = 0; i < n; i++) {
             for (int j = i +1;  j < n; ++j) {
                 if (array[j] < array[i]) {
@@ -28,12 +27,9 @@ public class SelectionSort {
      * */
     public void selectionSort2 (int[] array, int n) {
         if (n <= 1) return;
-
         int minLocation = 0;
-
         for (int i = 0; i < n; i++) {
             minLocation = i;
-
             for (int j = i +1; j < n; ++j) {
                 if (array[j] < array[minLocation]) {
                     minLocation = j;

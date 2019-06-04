@@ -8,7 +8,6 @@ public class QuickSort {
     public static void main(String[] args){
         int[] test = {9,2,6,3,5,7,10,11,12};
         quickSort(test);
-
         for (int i = 0; i < test.length; i++) {
             System.out.println(test[i]);
         }
@@ -30,14 +29,12 @@ public class QuickSort {
     private static int partition(int[] array, int low, int high) {
         //固定的切分方式
         int key = array[low];
-
         while (low < high) {
             //从后半部分向前扫描
             while (array[high] >= key && high > low) {
                 high--;
             }
             array[low] = array[high];
-
             // 从前半部分向后扫描
             while (array[low] <=key && high > low){
                 low++;
@@ -55,16 +52,13 @@ public class QuickSort {
         if (array[mid] > array[high]) {
             swap(array[mid], array[high]);
         }
-
         if (array[low]>array[high]) {
             swap(array[low], array[high]);
         }
-
         // 确保key是三个数的中间值
         if (array[mid]>array[low]) {
             swap(array[mid], array[low]);
         }
-
         int key = array[low];
         while (low < high) {
             //从后半部分向前扫描

@@ -139,9 +139,6 @@ public class StringMatch {
         return m;
     }
 
-
-
-
     /**
      * KMP匹配算法
      * @param sStr 父串
@@ -153,7 +150,6 @@ public class StringMatch {
         int dLength = dStr.length();
         int sIndex = 0, dIndex = 0;
         int[] next = getNextArray(dStr);
-
         while (sIndex < sLength && dIndex < dLength) {
             //当前字符匹配
             if (dIndex==-1||sStr.charAt(sIndex) == dStr.charAt(dIndex)) {
@@ -189,6 +185,14 @@ public class StringMatch {
             }
         }
         return nextArr;
+    }
+
+    public static void main(String[] args){
+        String sString = "aabb";
+        int[] nextArray = getNextArray(sString);
+        for (int i = 0; i < nextArray.length; i++) {
+            System.out.println(nextArray[i]);
+        }
     }
 
 }

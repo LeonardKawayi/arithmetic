@@ -15,9 +15,7 @@ public class InsertSort {
     static void insertSort (int[] array, int n) {
         for (int i = 0; i < n; i++) {
             int value = array[i];
-
             int j = i - 1;
-
             for (; j >=0; --j) {
                 if (array[j] > value) {
                     array[j+1] = array[j];

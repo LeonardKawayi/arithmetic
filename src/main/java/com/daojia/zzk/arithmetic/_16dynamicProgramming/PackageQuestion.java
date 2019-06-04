@@ -9,13 +9,13 @@ import java.util.Arrays;
 public class PackageQuestion {
 
     public static boolean findPath (int[] array) {
-        boolean[] dp = new boolean[array.length];
+        boolean[] dp = new boolean[array.length - 1];
         dp[0] = true;
 
-        Arrays.fill(dp, 1, array.length, false);
+        Arrays.fill(dp, 1, array.length - 1, false);
 
-        for (int i = 0; i < array.length; i++) {
-            if (dp[i] && (array[i] + i < array.length)) {
+        for (int i = 0; i < array.length - 1; i++) {
+            if (dp[i] && (array[i] + i < array.length - 1)) {
                 dp[array[i] + i] = true;
             }
         }

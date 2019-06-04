@@ -20,7 +20,6 @@ public class MergeSort {
             mergerSort(array, left, mid);
             // 右边归并排序，是的右子序列有序
             mergerSort(array, mid + 1, right);
-
             // 合并两个子序列
             merger(array, left, mid, right);
         }
