@@ -1,5 +1,9 @@
 package com.daojia.zzk.arithmetic._16dynamicProgramming;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author zhangzk
  * 0-1背包问题的求解
@@ -89,10 +93,9 @@ public class Package01 {
      * 只申请一个一维数组解决
      * weight: 物品重量，n: 物品个数，w: 背包可承载重量
      * */
-    public int  knapsack2 (int[] weight, int n, int w) {
+    public static int  knapsack2 (int[] weight, int n, int w) {
         boolean[] states = new boolean[w+1];
         states[weight[0]]=true;
-
         // 动态规划
         for (int i = 0; i < n; i++) {
             // 不把第 i 个物品放入背包, j表示当前放入背包中的重量
@@ -107,7 +110,40 @@ public class Package01 {
 
         return 0;
     }
+    public static List<Integer>  knapsack3 (int[] weight, int n, int w) {
+        List<Integer> list = new ArrayList<>();
+        for (int i : weight) {
+            list.add(i);
+        }
+        boolean[] states = new boolean[w+1];
+        states[weight[0]]=true;
+        // 动态规划
+        for (int i = 0; i < n; i++) {
+            // 不把第 i 个物品放入背包, j表示当前放入背包中的重量
+            for (int j = w-weight[i]; j >=0 ; --j) {
+                if (states[j]) states[j+weight[i]]=true;
+            }
+        }
 
+        int result2 = 33999262;
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            // 不把第 i 个物品放入背包, j表示当前放入背包中的重量
+            if (states[result2-weight[i]]) {
+                result.add(weight[i]);
+                result2 = result2 - weight[i];
+            }
+        }
 
+        return result;
+    }
 
+    public static void main(String[] args){
+        int[] nums = {3000000, 400000, 150000, 735942, 150000, 1000, 591923, 1800000, 500000, 4172481, 1466900, 3863100, 365650, 45114, 210120, 21773094};
+        int target = 33999262;
+        List<Integer> list = knapsack3(nums, nums.length, target);
+        for (Integer integer : list) {
+            System.out.println(integer);
+        }
+    }
 }
